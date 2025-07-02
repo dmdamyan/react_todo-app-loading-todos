@@ -29,6 +29,7 @@ export const Header: React.FC<Props> = ({ todos, title, setTitle }) => {
           placeholder="What needs to be done?"
           value={title}
           onChange={event => setTitle(event.target.value)}
+          onSubmit={e => e.preventDefault()}
         />
       </form>
     </div>

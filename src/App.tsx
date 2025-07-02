@@ -2,9 +2,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import { UserWarning } from './UserWarning';
-import { URL, USER_ID } from './api/todos';
+import { getTodos, USER_ID } from './api/todos';
 import { Todo } from './types/Todo';
-import { client } from './utils/fetchClient';
 import { Header } from './Components/Header';
 import { Footer } from './Components/Footer';
 import { TodoList } from './Components/TodoList';
@@ -17,14 +16,24 @@ export const App: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState('all');
 
   useEffect(() => {
-    client
-      .get<Todo[]>(URL)
+    setErrorMessage('');
+    getTodos()
       .then(setTodos)
       .catch(error => {
         setErrorMessage('Unable to load todos');
         throw error;
       });
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => setErrorMessage(''), 3000);
+
+      return () => clearTimeout(timer);
+    }
+
+    return;
+  }, [errorMessage]);
 
   const filteredTodos = todos.filter(todo => {
     if (filterStatus === 'active') {

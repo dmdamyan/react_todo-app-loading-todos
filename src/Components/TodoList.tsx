@@ -19,6 +19,7 @@ export const TodoList: React.FC<Props> = ({ filteredTodos }) => {
           })}
           key={todo.id}
         >
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="todo__status-label">
             <input
               data-cy="TodoStatus"
@@ -27,10 +28,11 @@ export const TodoList: React.FC<Props> = ({ filteredTodos }) => {
               checked={todo.completed}
               onChange={() => {}}
             />
-            <span data-cy="TodoTitle" className="todo_title">
-              {todo.title}
-            </span>
           </label>
+
+          <span data-cy="TodoTitle" className="todo__title">
+            {todo.title}
+          </span>
 
           {/* <span data-cy="TodoTitle" className="todo__title">
                 Completed Todo
