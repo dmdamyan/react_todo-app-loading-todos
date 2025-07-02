@@ -24,7 +24,7 @@ export const TodoList: React.FC<Props> = ({ filteredTodos }) => {
               data-cy="TodoStatus"
               type="checkbox"
               className="todo__status"
-              checked
+              checked={todo.completed}
               onChange={() => {}}
             />
             <span data-cy="TodoTitle" className="todo_title">
